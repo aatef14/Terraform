@@ -19,6 +19,5 @@ resource "aws_instance" "terra" {
     vpc_security_group_ids = ["sg-0c098d0659f677188"]
 }
 
-resource "aws_vpc" "name" {
-  
+resource "aws_vpc" "n
 }
