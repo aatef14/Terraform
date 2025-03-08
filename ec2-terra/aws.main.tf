@@ -2,7 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-#EC2 Instance hello
+#EC2 Instance 
 resource "aws_instance" "EC2" {
   ami = var.ami
   instance_type = var.instance_type
