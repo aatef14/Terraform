@@ -1,23 +1,34 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.89.0"
-    }
-  }
-}
-
 provider "aws" {
-  region = "ap-south-1"
+  region = var.region
 }
 
-resource "aws_instance" "terra" {
-    ami="ami-0d682f26195e9ec0f"
-    instance_type = "t2.micro"
-    iam_instance_profile = "SSM-EC2"
-    subnet_id = "subnet-0b447a3ba894168f9"
-    vpc_security_group_ids = ["sg-0c098d0659f677188"]
+#EC2 Instance 
+resource "aws_instance" "EC2" {
+  ami = var.ami
+  instance_type = var.instance_type
+  subnet_id = var.subnet_id
+  key_name = var.key_name
+  vpc_security_group_ids = length(var.security_groups) > 0 ? [var.security_groups] : null
+  
+  private_ip = var.private_ip != "" ? var.private_ip : null
+  iam_instance_profile = var.iam_instance_profile
+  
+  root_block_device {
+    volume_size = var.root_volume_size
+    volume_type = "gp3"
+  }
+
+  #ebs_block_device {
+   # device_name = "/dev/sdb"
+    #volume_size = var.extra_volume_size
+    #volume_type = "gp3"
+  #}
+
+  tags = {
+    Name = var.Name 
+  }
+
+  
+  
 }
 
-resource "aws_vpc" "n
-}
