@@ -1,0 +1,39 @@
+This is terraform .tf file for launching AWS EC2 instance with most customisable setting.
+1. aws.main.tf contains all the configuration for launching the instance.
+2. variables.tf conatins all the variables necessary for defining values in the configuration file.
+3. input.tfvar contains all the key and values for provisioning ec2 resource.
+4. output.tf contain paratmeters which is needed to output the details of what is provisioned.
+
+TO use this conf
+#Download the repo
+git clone --filter=blob:none --sparse https://github.com/atif14/terraform.git
+cd /terraform/ec2-terra
+git sparse-checkout set vpc-terra  #this installs only ec2 conf
+
+#validate the code for syntax errors
+terraform validate
+#Check what will be provisioned
+terraform plan
+#Deploy the instance
+terraform apply 
+
+After the above command you will get options for creations of instance such as AMI ID, subnt, ipv4 etc.
+as per the input the instance will be launched.
+
+#To Modify the instance rerun e.g renaming 
+terraform apply
+will ask you for various input accordingly for the things you need to modify.
+make sure to mention instance name when prompted.
+#To terminate the instance 
+terraform destroy 
+
+Keep the inputs blank and enter, the instance will be terminated.
+
+
+#Things that will destroy when modifying instance
+1.Changing the AMI (Amazon Machine Image)
+2.Changing the Instance Type
+3.Changing the Key Pair
+4.Changing the Root Volume (EBS) Type or Device Name
+5.Changing the Subnet or VPC
+6. Changing iam profile
