@@ -6,8 +6,8 @@ terraform {
     }
   }
 }
-
-provider "aws" {
+#this is a message
+provider "aws" { 
   region = local.region
 }
 
